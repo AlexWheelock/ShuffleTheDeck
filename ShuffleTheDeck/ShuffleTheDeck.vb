@@ -108,7 +108,7 @@ Module ShuffleTheDeck
 
         temp = tracker
 
-        Dim suits() = {"S", "C", "H", "D"}
+        Dim suits() = {$"{Chr(6)}", $"{Chr(5)}", $"{Chr(3)}", $"{Chr(4)}"}
         Console.Clear()
 
         For Each letter In suits
