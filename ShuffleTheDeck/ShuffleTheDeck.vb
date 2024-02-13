@@ -8,14 +8,6 @@ Option Compare Text
 'https://github.com/AlexWheelock/ShuffleTheDeck.git
 
 Imports System.Runtime.Remoting.Messaging
-
-
-
-'TODO:
-'[ ] Start New Game
-'[ ] Draw a card
-'[ ] Track which cards have been drawn
-'[ ] Display which cards have been drawn
 Module ShuffleTheDeck
 
     Sub Main()
