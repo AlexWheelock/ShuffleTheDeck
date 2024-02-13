@@ -51,6 +51,7 @@ Module ShuffleTheDeck
             currentValue = RandomNumberTo(13)
         Loop While tracker(currentValue, currentsuit)
 
+        tracker(currentValue, currentSuit) = True
 
     End Sub
 
@@ -58,7 +59,7 @@ Module ShuffleTheDeck
         Dim randomNumber As Integer
 
         Randomize()
-        randomNumber = CInt(Math.Floor(Rnd() * (max + 2)))
+        randomNumber = CInt(Math.Floor(Rnd() * max))
 
         Return randomNumber
     End Function
@@ -66,6 +67,7 @@ Module ShuffleTheDeck
     Sub Display(tracker(,) As Boolean)
 
         Dim temp(13, 4) As Boolean
+        Dim card As String
 
         temp = tracker
 
@@ -78,11 +80,40 @@ Module ShuffleTheDeck
         Console.WriteLine()
 
 
+
         For row = 0 To 13
             For column = 0 To 4
                 If temp(row, column) Then
-                    Console.WriteLine($" {(column * 13) + (row + 1)} |")
-                Else console.Write("  |")
+                    Select Case row
+                        Case 1
+                            card = "2"
+                        Case 2
+                            card = "3"
+                        Case 3
+                            card = "4"
+                        Case 4
+                            card = "5"
+                        Case 5
+                            card = "6"
+                        Case 6
+                            card = "7"
+                        Case 7
+                            card = "8"
+                        Case 8
+                            card = "9"
+                        Case 9
+                            card = "10"
+                        Case 10
+                            card = "J"
+                        Case 11
+                            card = "Q"
+                        Case 12
+                            card = "K"
+                        Case 13
+                            card = "A"
+                    End Select
+                    Console.WriteLine($"{card} |")
+                Else Console.Write("  |")
                 End If
             Next
             Console.WriteLine()
