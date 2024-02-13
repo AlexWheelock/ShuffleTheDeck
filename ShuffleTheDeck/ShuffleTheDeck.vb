@@ -21,21 +21,39 @@ Module ShuffleTheDeck
     Sub Main()
         Dim userInput As String
         Dim tracker(13, 4) As Boolean
+        Dim cardsDrawn As Integer = 0
+        Dim message As String = ("Welcome to Draw A Card!" & vbNewLine _
+                          & "Press " & Chr(34) & "D" & Chr(34) & " to draw a card, " & Chr(34) & "N" & Chr(34) & " to start a new game, or " & Chr(34) & "Q" & Chr(34) & " to quit.")
 
-        Console.WriteLine("Welcome to Draw A Card!")
-        Console.WriteLine()
 
-        'Do
-        Display(tracker)
-        PickACard(tracker)
+        StartAGame(tracker)
 
-        'Loop Until userInput = "q"
+        Do
+            Display(tracker)
+            Console.WriteLine()
+            Console.WriteLine(message)
+            userInput = Console.ReadLine()
+            If userInput = "q" Then
+                Console.WriteLine()
+                Console.WriteLine("Thanks for playing!" & vbNewLine _
+                              & "Have a great day!")
+                Console.Read()
+                Exit Sub
+            ElseIf userInput = "n" Then
+                StartAGame(tracker)
+                cardsDrawn = 0
+            Else
+                If cardsDrawn >= 52 Then
+                    message = ("All cards have been drawn..." & vbNewLine _
+                        & "Press " & Chr(34) & "N" & Chr(34) & " to start a new game, or " & Chr(34) & "Q" & Chr(34) & " to quit.")
+                Else
+                    PickACard(tracker)
+                    cardsDrawn += 1
+                    message = "Press " & Chr(34) & "D" & Chr(34) & " to draw a card, " & Chr(34) & "N" & Chr(34) & " to start a new game, or " & Chr(34) & "Q" & Chr(34) & " to quit."
+                End If
+            End If
+        Loop Until userInput = "q"
 
-        Console.WriteLine()
-        Console.WriteLine("Thanks for playing!" & vbNewLine _
-                          & "Have a great day!")
-
-        Console.Read()
     End Sub
 
     Sub StartAGame(ByRef tracker(,) As Boolean)
@@ -79,41 +97,44 @@ Module ShuffleTheDeck
         Next
         Console.WriteLine()
 
-
-
-        For row = 0 To 13
-            For column = 0 To 4
+        For row = 0 To 12
+            For column = 0 To 3
                 If temp(row, column) Then
                     Select Case row
-                        Case 1
+                        Case 0
                             card = "2"
-                        Case 2
+                        Case 1
                             card = "3"
-                        Case 3
+                        Case 2
                             card = "4"
-                        Case 4
+                        Case 3
                             card = "5"
-                        Case 5
+                        Case 4
                             card = "6"
-                        Case 6
+                        Case 5
                             card = "7"
-                        Case 7
+                        Case 6
                             card = "8"
-                        Case 8
+                        Case 7
                             card = "9"
-                        Case 9
+                        Case 8
                             card = "10"
-                        Case 10
+                        Case 9
                             card = "J"
-                        Case 11
+                        Case 10
                             card = "Q"
-                        Case 12
+                        Case 11
                             card = "K"
-                        Case 13
+                        Case 12
                             card = "A"
                     End Select
-                    Console.WriteLine($"{card} |")
-                Else Console.Write("  |")
+                    If card = "10" Then
+                        Console.Write(($" {card}|").PadLeft(3).PadRight(4))
+                    Else
+                        Console.Write(($" {card} |").PadLeft(3).PadRight(4))
+                    End If
+                Else
+                    Console.Write(("   |").PadLeft(3).PadRight(4))
                 End If
             Next
             Console.WriteLine()
